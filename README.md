@@ -7,5 +7,5 @@ I was always facinaded by solving it myself, so I decided to put it on code and 
 
 Here is the result of me trying to play with code and my other hobbies. 
 
-Hope you enjoy it or it helps you out :) 
+Hope you enjoy it and that it may help you out :) 
 
