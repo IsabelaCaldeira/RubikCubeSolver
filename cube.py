@@ -102,7 +102,7 @@ class RubiksCube:
     def show(self):
         """
         Input: None
-        Description: Show the rubiks cube
+        Description:  tShowhe rubiks cube
         Output: None
         """
         spacing = f'{" " * (len(str(self.cube[0][0])) + 2)}'
@@ -110,4 +110,42 @@ class RubiksCube:
         l2 = '\n'.join('  '.join(str(self.cube[i][j]) for i in range(1,5)) for j in range(len(self.cube[0])))
         l3 = '\n'.join(spacing + str(c) for c in self.cube[5])
         print(f'{l1}\n\n{l2}\n\n{l3}')
+        
+    def horizontal_twist(self, row, direction):
+        """
+        Input: row - integer representing which row you would like to twist
+               direction - boolean representing if you want to twist right or left [left - 0, right - 1]
+        Description: Twist desired row of rubiks cube
+        Output: None
+        """
+        if row < len(self.cube[0]):
+            if direction == 0: #Twist left
+                self.cube[1][row], self.cube[2][row], self.cube[3][row], self.cube[4][row] = (self.cube[2][row],
+                                                                                              self.cube[3][row],
+                                                                                              self.cube[4][row],
+                                                                                              self.cube[1][row])
+
+            elif direction == 1: #Twist right
+                self.cube[1][row], self.cube[2][row], self.cube[3][row], self.cube[4][row] = (self.cube[4][row],
+                                                                                              self.cube[1][row],
+                                                                                              self.cube[2][row],
+                                                                                              self.cube[3][row])
+            else:
+                print(f'ERROR - direction must be 0 (left) or 1 (right)')
+                return
+            #Rotating connected face
+            if direction == 0: #Twist left
+                if row == 0:
+                    self.cube[0] = [list(x) for x in zip(*reversed(self.cube[0]))] #Transpose top
+                elif row == len(self.cube[0]) - 1:
+                    self.cube[5] = [list(x) for x in zip(*reversed(self.cube[5]))] #Transpose bottom
+            elif direction == 1: #Twist right
+                if row == 0:
+                    self.cube[0] = [list(x) for x in zip(*self.cube[0])][::-1] #Transpose top
+                elif row == len(self.cube[0]) - 1:
+                    self.cube[5] = [list(x) for x in zip(*self.cube[5])][::-1] #Transpose bottom
+        else:
+            print(f'ERROR - desired row outside of rubiks cube range. Please select a row between 0-{len(self.cube[0])-1}')
+            return
+
 
