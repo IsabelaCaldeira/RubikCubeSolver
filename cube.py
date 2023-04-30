@@ -185,5 +185,41 @@ class RubiksCube:
             print(f'ERROR - desired column outside of rubiks cube range. Please select a column between 0-{len(self.cube[0])-1}')
             return
 
+    def side_twist(self, column, direction):
+        """
+        Input: column - integer representing which column you would like to twist
+               direction (z) - boolean representing if you want to twist up or down [down - 0, up - 1]
+        Description: Twist desired side column of rubiks cube
+        Output: None
+        """
+        if column < len(self.cube[0]):
+            for i in range(len(self.cube[0])):
+                if direction == 0: #Twist down
+                    self.cube[0][column][i], self.cube[1][-i-1][column], self.cube[3][i][-column-1], self.cube[5][-column-1][-1-i] = (self.cube[3][i][-column-1],
+                                                                                                                                      self.cube[0][column][i],
+                                                                                                                                      self.cube[5][-column-1][-1-i],
+                                                                                                                                      self.cube[1][-i-1][column])
+                elif direction == 1: #Twist up
+                    self.cube[0][column][i], self.cube[1][-i-1][column], self.cube[3][i][-column-1], self.cube[5][-column-1][-1-i] = (self.cube[1][-i-1][column],
+                                                                                                                                      self.cube[5][-column-1][-1-i],
+                                                                                                                                      self.cube[0][column][i],
+                                                                                                                                      self.cube[3][i][-column-1])
+                else:
+                    print(f'ERROR - direction must be 0 (down) or 1 (up)')
+                    return
+            #Rotating connected face
+            if direction == 0: #Twist down
+                if column == 0:
+                    self.cube[4] = [list(x) for x in zip(*reversed(self.cube[4]))] #Transpose back
+                elif column == len(self.cube[0]) - 1:
+                    self.cube[2] = [list(x) for x in zip(*reversed(self.cube[2]))] #Transpose top
+            elif direction == 1: #Twist up
+                if column == 0:
+                    self.cube[4] = [list(x) for x in zip(*self.cube[4])][::-1] #Transpose back
+                elif column == len(self.cube[0]) - 1:
+                    self.cube[2] = [list(x) for x in zip(*self.cube[2])][::-1] #Transpose top
+        else:
+            print(f'ERROR - desired column outside of rubiks cube range. Please select a column between 0-{len(self.cube[0])-1}')
+            return
 
 
