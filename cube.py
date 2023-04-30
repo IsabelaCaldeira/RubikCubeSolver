@@ -65,3 +65,10 @@ class RubiksCube:
                 break
         return check
 
+    def stringify(self):
+        """
+        Input: None
+        Description: Create string representation of the current state of the cube
+        Output: string representing the cube current state
+        """
+        return ''.join([i for r in self.cube for s in r for i in s])
