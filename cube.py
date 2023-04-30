@@ -42,3 +42,26 @@ class RubiksCube:
         Output: None
         """
         self.cube = [[[c for x in range(self.n)] for y in range(self.n)] for c in self.colours]
+        
+    def solved(self):
+        """
+        Input: None
+        Description: Determine if the cube is solved or not
+        Output: boolean representing if the cube is solved or not
+        """
+        for side in self.cube:
+            hold = []
+            check = True
+            for row in side:
+                if len(set(row)) == 1:
+                    hold.append(row[0])
+                else:
+                    check = False
+                    break
+            if check == False:
+                break
+            if len(set(hold)) > 1:
+                check = False
+                break
+        return check
+
