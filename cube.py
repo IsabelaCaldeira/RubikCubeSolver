@@ -12,7 +12,7 @@ class RubiksCube:
         state = None
     ):
         
-        """"
+        """
         Input: n - integer representing the width and height of the rubiks cube
                colours - list containing the first letter of ever colour you wish to use (Default = ['w', 'o', 'g', 'r', 'b', 'y']) [OPTIONAL]
                state - string representing the current state of the rubix cube (Default = None) [OPTIONAL]
@@ -34,3 +34,11 @@ class RubiksCube:
                     self.cube[-1].append([])
                 elif len(self.cube[-1][-1]) == self.n and len(self.cube[-1]) == self.n and i < len(state) - 1:
                     self.cube.append([[]])
+                    
+    def reset(self):
+        """
+        Input: None
+        Description: Reset the cube to its inital state
+        Output: None
+        """
+        self.cube = [[[c for x in range(self.n)] for y in range(self.n)] for c in self.colours]
