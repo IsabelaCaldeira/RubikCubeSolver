@@ -98,3 +98,16 @@ class RubiksCube:
                 self.vertical_twist(j, a[1])
             elif a[0] == 's':
                 self.side_twist(j, a[1])
+                
+    def show(self):
+        """
+        Input: None
+        Description: Show the rubiks cube
+        Output: None
+        """
+        spacing = f'{" " * (len(str(self.cube[0][0])) + 2)}'
+        l1 = '\n'.join(spacing + str(c) for c in self.cube[0])
+        l2 = '\n'.join('  '.join(str(self.cube[i][j]) for i in range(1,5)) for j in range(len(self.cube[0])))
+        l3 = '\n'.join(spacing + str(c) for c in self.cube[5])
+        print(f'{l1}\n\n{l2}\n\n{l3}')
+
