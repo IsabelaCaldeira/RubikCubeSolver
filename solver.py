@@ -16,3 +16,17 @@ class IDA_star(object):
         self.min_threshold = None
         self.heuristic = heuristic
         self.moves = []
+    
+    def run(self, state):
+        """
+        Input: state - string representing the current state of the cube
+        Description: solve the rubix cube
+        Output: list containing the moves taken to solve the cube
+        """
+        while True:
+            status = self.search(state, 1)
+            if status: return self.moves
+            self.moves = []
+            self.threshold = self.min_threshold
+        return []
+
