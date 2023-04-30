@@ -72,3 +72,29 @@ class RubiksCube:
         Output: string representing the cube current state
         """
         return ''.join([i for r in self.cube for s in r for i in s])
+
+    def shuffle(self, l_rot = 5, u_rot = 100):
+        """
+        Input: l_rot - integer representing the lower bounds of amount of moves (Default = 5) [OPTIONAL]
+               u_rot - integer representing the upper bounds of amount of moves (Default = 100) [OPTIONAL]
+        Description: Shuffles rubiks cube to random solvable state
+        Output: None
+        """
+        moves = randint(l_rot, u_rot)
+        actions = [
+            ('h', 0),
+            ('h', 1),
+            ('v', 0),
+            ('v', 1),
+            ('s', 0),
+            ('s', 1)
+        ]
+        for i in range(moves):
+            a = choice(actions)
+            j = randint(0, self.n - 1)
+            if a[0] == 'h':
+                self.horizontal_twist(j, a[1])
+            elif a[0] == 'v':
+                self.vertical_twist(j, a[1])
+            elif a[0] == 's':
+                self.side_twist(j, a[1])
