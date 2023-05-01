@@ -30,3 +30,47 @@ class IDA_star(object):
             self.threshold = self.min_threshold
         return []
 
+    def search(self, state, g_score):
+        """
+        Input: state - string representing the current state of the cube
+               g_score - integer representing the cost to reach the current node
+        Description: search the game tree using the IDA* algorithm
+        Output: boolean representing if the cube has been solved
+        """
+        cube = RubiksCube(state=state)
+        if cube.solved():
+            return True
+        elif len(self.moves) >= self.threshold:
+            return False
+        min_val = float('inf')
+        best_action = None
+        for a in [(r, n, d) for r in ['h', 'v', 's'] for d in [0, 1] for n in range(cube.n)]:
+            cube = RubiksCube(state=state)
+            if a[0] == 'h':
+                cube.horizontal_twist(a[1], a[2])
+            elif a[0] == 'v':
+                cube.vertical_twist(a[1], a[2])
+            elif a[0] == 's':
+                cube.side_twist(a[1], a[2])
+            if cube.solved():
+                self.moves.append(a)
+                return True
+            cube_str = cube.stringify()
+            h_score = self.heuristic[cube_str] if cube_str in self.heuristic else self.max_depth
+            f_score = g_score + h_score
+            if f_score < min_val:
+                min_val = f_score
+                best_action = [(cube_str, a)]
+            elif f_score == min_val:
+                if best_action is None:
+                    best_action = [(cube_str, a)]
+                else:
+                    best_action.append((cube_str, a))
+        if best_action is not None:
+            if self.min_threshold is None or min_val < self.min_threshold:
+                self.min_threshold = min_val
+            next_action = choice(best_action)
+            self.moves.append(next_action[1])
+            status = self.search(next_action[0], g_score + min_val)
+            if status: return status
+        return False
