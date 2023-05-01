@@ -36,3 +36,25 @@ if h_db is None or NEW_HEURISTICS is True:
             ensure_ascii=False,
             indent=4
         )
+        
+#--------------------------------
+cube.shuffle(
+    l_rot = MAX_MOVES if MAX_MOVES < 5 else 5,
+    u_rot = MAX_MOVES
+)
+cube.show()
+print('----------')
+#--------------------------------
+
+solver = IDA_star(h_db)
+moves = solver.run(cube.stringify())
+print(moves)
+
+for m in moves:
+    if m[0] == 'h':
+        cube.horizontal_twist(m[1], m[2])
+    elif m[0] == 'v':
+        cube.vertical_twist(m[1], m[2])
+    elif m[0] == 's':
+        cube.side_twist(m[1], m[2])
+cube.show()
