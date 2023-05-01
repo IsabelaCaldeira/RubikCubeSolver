@@ -4,6 +4,7 @@ import os.path
 from cube import RubiksCube
 from solver import IDA_star, build_heuristic_db
 
+
 MAX_MOVES = 5
 NEW_HEURISTICS = False
 HEURISTIC_FILE = 'heuristic.json'
