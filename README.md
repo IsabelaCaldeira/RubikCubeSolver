@@ -1,11 +1,44 @@
 # Rubik Cube Solver :bulb:	
-Here is being made an algorithm to solve the rubik cube!
 
 The rubik cube is a toy for kids and also a passion of the mathematicians. It is very complex and there are A LOT of possibilities when is about solving one.
 
 (When I say a lot is I mean 43,252,003,274,489,856,000 possible combinations.)
 
-Now, I think you can understand why I was always facinaded by it. Here is the result of me trying to play with code and my other hobbies. 
+By Default the solver will work with a randomly scrambled cube however this can be modified. To modify the cube being solved go into the main.py file and change the following variable to the representation of the cube you want.
 
-Hope you enjoy it and that it may help you out :) 
+```
+cube = RubiksCube(
+    state="rrrwrwrgryrywwwwrwbrbggggggwowyyyyyygygbbbbbbooobooooo"
+)
+```
+
+You can also adjust your heuristics globals found at the top:
+
+```
+MAX_MOVES = 5 #max amount of moves when building heuristics map
+NEW_HEURISTICS = False #control for overwritting heuristics
+HEURISTIC_FILE = 'heuristic.json' #file that the heuristics are saved in or need to be saved in
+```
+# Launch Instructions
+step 1: open your console <br>
+step 2: create a virutal enviroment <br>
+step 3: type the following command: <br>
+
+```
+pip install -r requirements.txt
+```
+
+step 4: type the following command:
+
+```
+cd <app directory>
+```
+
+step 5: type the following command:
+
+```
+python3 main.py
+```
+
+step 6: type in the action you wish to perform
 
