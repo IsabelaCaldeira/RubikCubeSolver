@@ -12,7 +12,7 @@ cube = RubiksCube(
 )
 ```
 
-You can also adjust your heuristics globals found at the top:
+You can also adjust your heuristics globals found at the top of main as:
 
 ```
 MAX_MOVES = 5 #max amount of moves when building heuristics map
@@ -31,7 +31,7 @@ pip install -r requirements.txt
 step 4: type the following command:
 
 ```
-cd <app directory>
+cd <your app directory>
 ```
 
 step 5: type the following command:
